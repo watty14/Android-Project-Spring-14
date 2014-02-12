@@ -5,22 +5,38 @@
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dip" >
 
         <ImageView
-            android:contentDescription="@string/logo"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginLeft="90dip"
+            android:contentDescription="@string/logo"
             android:src="@drawable/wallt" />
 
         <TextView
+            android:id="@+id/fullName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/id"
+            android:text="@string/fullName"
+            android:textColor="#372c24" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:inputType="text"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/emailAddress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
             android:textColor="#372c24" />
 
         <EditText
@@ -47,29 +63,29 @@
             android:singleLine="true" />
     </LinearLayout>
 
-          <!-- Login button -->
+    <!-- Login button -->
 
-          <Button
-              android:id="@+id/btnLogin"
-              android:layout_width="120dp"
-              android:layout_height="wrap_content"
-              android:layout_centerHorizontal="true"
-              android:layout_centerVertical="true"
-              android:gravity="center"
-              android:background="@drawable/bg"
-              android:text="@string/Login"
-              android:textSize="20sp" />
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bg"
+        android:gravity="center"
+        android:text="@string/createAccount"
+        android:textSize="20sp" />
 
-          <Button android:id="@+id/backToMain"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-              	android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:text="@string/backToMain"
-                android:gravity="center"
-          	    android:background="@drawable/bg"
-                android:layout_below="@id/btnLogin"
-                android:textSize="20sp"/>
- 
+    <Button
+        android:id="@+id/backToMain"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnLogin"
+        android:layout_below="@+id/btnLogin"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/bg"
+        android:gravity="center"
+        android:text="@string/backToMain"
+        android:textSize="20sp" />
 
 </RelativeLayout>

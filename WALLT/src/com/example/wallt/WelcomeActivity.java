@@ -25,5 +25,16 @@ public class WelcomeActivity extends Activity {
         	  startActivity(i);
           }
       });
+      
+      TextView registerScreen = (TextView) findViewById(R.id.link_Register);
+      
+      // Listener for Register button
+      registerScreen.setOnClickListener(new View.OnClickListener() {
+
+          public void onClick(View v) {
+        	  Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+        	  startActivity(i);
+          }
+      });
      }
 }

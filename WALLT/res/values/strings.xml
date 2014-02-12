@@ -7,10 +7,14 @@
     <string name="Login">Login</string>
     <string name="Register">Register</string>
     <string name="logo">Logo</string>
-    <string name="id">ID</string>    
+    <string name="id">ID</string>
     <string name="email">Email</string>
+    <string name="createAccount">Create Account</string>
+    <string name="fullName">Full Name</string>
     <string name="pwd">Password</string>
     <string name="backToMain">Back</string>
-    
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_login">Login</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
