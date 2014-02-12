@@ -24,6 +24,7 @@ public class LoginActivity extends Activity {
         login.setOnClickListener(new View.OnClickListener() {
  
             public void onClick(View v) {
+            	//this needs to be replaced with a SQL query
             	if (userName.getText().toString().equals("user") 
             			&& passWord.getText().toString().equals("password")) {
 	            	Intent i = new Intent(getApplicationContext(), MainHub.class);
