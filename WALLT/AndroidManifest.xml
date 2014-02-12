@@ -29,9 +29,9 @@
         </activity>
         <activity
             android:name="com.example.wallt.LoginActivity"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_login"
-            android:parentActivityName="com.example.wallt.WelcomeActivity" >
+            android:parentActivityName="com.example.wallt.WelcomeActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.wallt.WelcomeActivity" />
@@ -43,6 +43,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.wallt.WelcomeActivity" />
+        </activity>
+        <activity
+            android:name="com.example.wallt.MainHub"
+            android:label="@string/title_activity_main_hub" >
+        </activity>
+        <activity
+            android:name="com.example.wallt.LoginFail"
+            android:label="@string/title_activity_login_fail" >
         </activity>
     </application>
 
