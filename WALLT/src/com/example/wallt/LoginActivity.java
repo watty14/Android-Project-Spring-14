@@ -10,11 +10,13 @@ import android.view.View;
 import android.widget.TextView;
  
 public class LoginActivity extends Activity {
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // setting default screen to login.xml
         setContentView(R.layout.login_activity);
+        final DataBaseManager db = new DataBaseManager(this);
         
         TextView login = (TextView) findViewById(R.id.btnLogin);
         
@@ -25,8 +27,7 @@ public class LoginActivity extends Activity {
  
             public void onClick(View v) {
             	//this needs to be replaced with a SQL query
-            	if (userName.getText().toString().equals("user") 
-            			&& passWord.getText().toString().equals("password")) {
+            	if (db.loginVerify(userName.getText().toString(), passWord.getText().toString())) {
 	            	Intent i = new Intent(getApplicationContext(), MainHub.class);
 	          	  	startActivity(i);
             	} else {

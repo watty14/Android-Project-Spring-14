@@ -19,13 +19,14 @@
             android:src="@drawable/wallt" />
 
         <TextView
-            android:id="@+id/fullName"
+            android:id="@+id/userName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fullName"
+            android:text="@string/userName"
             android:textColor="#372c24" />
 
         <EditText
+            android:id="@+id/userNameField"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
@@ -40,6 +41,7 @@
             android:textColor="#372c24" />
 
         <EditText
+            android:id="@+id/emailField"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dip"
@@ -56,6 +58,7 @@
             android:textColor="#372c24" />
 
         <EditText
+            android:id="@+id/passwordField"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
@@ -66,7 +69,7 @@
     <!-- Login button -->
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/create"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout1"
@@ -80,8 +83,8 @@
         android:id="@+id/backToMain"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btnLogin"
-        android:layout_below="@+id/btnLogin"
+        android:layout_alignLeft="@+id/create"
+        android:layout_below="@+id/create"
         android:layout_marginTop="28dp"
         android:background="@drawable/bg"
         android:gravity="center"

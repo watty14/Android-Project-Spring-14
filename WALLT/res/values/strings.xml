@@ -8,6 +8,7 @@
     <string name="Register">Register</string>
     <string name="logo">Logo</string>
     <string name="id">ID</string>
+    <string name="userName">User Name</string>
     <string name="email">Email</string>
     <string name="createAccount">Create Account</string>
     <string name="fullName">Full Name</string>
@@ -20,5 +21,6 @@
     <string name="login_fail">Incorrect username/password</string>
     <string name="title_activity_main_hub">MainHub</string>
     <string name="title_activity_login_fail">LoginFail</string>
+    <string name="title_activity_registration_feed">RegistrationFeed</string>
 
 </resources>

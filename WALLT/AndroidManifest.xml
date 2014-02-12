@@ -52,6 +52,10 @@
             android:name="com.example.wallt.LoginFail"
             android:label="@string/title_activity_login_fail" >
         </activity>
+        <activity
+            android:name="com.example.wallt.RegistrationFeed"
+            android:label="@string/title_activity_registration_feed" >
+        </activity>
     </application>
 
 </manifest>
