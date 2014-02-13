@@ -170,4 +170,32 @@ public class DataBaseManager {
     	return matches;
     }
     
+    public boolean registerVerify(String username, String password) {
+    	Cursor cursor = null;
+    	boolean legal = true;
+    	if (username.equals("") || password.equals("")) {
+    		legal = false;
+    	}
+    	try {
+    		cursor = db.query(
+    				TABLE_NAME,
+    				new String[] { TABLE_COLUMN_ONE },
+    				TABLE_COLUMN_ONE + "= '" + username + "'", 
+    				null, null, null, null, null
+    		);
+    		cursor.moveToFirst();
+    		if (!cursor.isAfterLast()) {
+    			if (username.equals(cursor.getString(0).toString())) {
+    				legal = false;
+    			}
+    		}
+    		cursor.close();
+    	} catch (Exception e) {
+    		Log.e("DB ERROR", e.toString());
+    		e.printStackTrace();
+   
+    	}
+    	return legal;
+    }
+    
 }

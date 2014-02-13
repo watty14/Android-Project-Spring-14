@@ -25,12 +25,17 @@ public class RegisterActivity extends Activity {
         final TextView passWord = (TextView) findViewById(R.id.passwordField);
         
         registerAccount.setOnClickListener(new View.OnClickListener() {
- 
-            public void onClick(View v) {
-            	db.addRow(userName.getText().toString(), passWord.getText().toString());
-	            Intent i = new Intent(getApplicationContext(), RegistrationFeed.class);
-	          	startActivity(i);
-            }
+	        public void onClick(View v) {
+	        	if (db.registerVerify(userName.getText().toString(), passWord.getText().toString())) {
+	            	db.addRow(userName.getText().toString(), passWord.getText().toString());
+		            Intent i = new Intent(getApplicationContext(), RegistrationFeed.class);
+		          	startActivity(i);
+	        	} else {
+	        		Intent i = new Intent(getApplicationContext(), RegistrationFail.class);
+	          	  	startActivity(i);
+	            }
+	        	finish();
+        	}
         });
  
         TextView back = (TextView) findViewById(R.id.backToMain);

@@ -19,8 +19,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="successful_login">You have logged in successfully!</string>
     <string name="login_fail">Incorrect username/password</string>
+    <string name="registration_failed">Unable to register</string>
     <string name="title_activity_main_hub">MainHub</string>
     <string name="title_activity_login_fail">LoginFail</string>
     <string name="title_activity_registration_feed">RegistrationFeed</string>
+    <string name="title_activity_registration_fail">RegistrationFail</string>
 
 </resources>

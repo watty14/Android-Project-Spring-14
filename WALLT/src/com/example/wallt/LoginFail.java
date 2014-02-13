@@ -2,7 +2,6 @@ package com.example.wallt;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
 
 public class LoginFail extends Activity {
 
