@@ -38,8 +38,8 @@ public class DataBaseManager {
                 TABLE_NAME +
                 " (" +
                 TABLE_COLUMN_ID + " integer primary key autoincrement not null," +
-                TABLE_COLUMN_ONE + " text," +
-                TABLE_COLUMN_TWO + " text" +
+                TABLE_COLUMN_ONE + " text not null unique," +
+                TABLE_COLUMN_TWO + " text not null" +
                 ");";
             db.execSQL(newTableQueryString);
         }
@@ -151,16 +151,15 @@ public class DataBaseManager {
     		cursor = db.query(
     				TABLE_NAME,
     				new String[] { TABLE_COLUMN_ID, TABLE_COLUMN_ONE, TABLE_COLUMN_TWO },
+    				TABLE_COLUMN_ONE + "= '" + username + "'", 
     				null, null, null, null, null
     		);
     		cursor.moveToFirst();
     		if (!cursor.isAfterLast()) {
-	    		do {
-	    			if (username.equals(cursor.getString(1).toString()) && 
-	    					password.equals(cursor.getString(2).toString())) {
-	    				matches = true;
-	    			}
-	    		} while(cursor.moveToNext() && !matches);
+    			if (username.equals(cursor.getString(1).toString()) && 
+    					password.equals(cursor.getString(2).toString())) {
+    				matches = true;
+    			}
     		}
     		cursor.close();
     	} catch (Exception e) {
