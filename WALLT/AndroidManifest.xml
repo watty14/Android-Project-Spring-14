@@ -56,6 +56,10 @@
             android:name="com.example.wallt.RegistrationFeed"
             android:label="@string/title_activity_registration_feed" >
         </activity>
+        <activity
+            android:name="com.example.wallt.AdminHub"
+            android:label="@string/title_activity_admin_hub" >
+        </activity>
     </application>
 
 </manifest>

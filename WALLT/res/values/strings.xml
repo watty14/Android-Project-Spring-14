@@ -20,9 +20,11 @@
     <string name="successful_login">You have logged in successfully!</string>
     <string name="login_fail">Incorrect username/password</string>
     <string name="registration_failed">Unable to register</string>
+    <string name="admin_hub_welcome">Successful admin login</string>
     <string name="title_activity_main_hub">MainHub</string>
     <string name="title_activity_login_fail">LoginFail</string>
     <string name="title_activity_registration_feed">RegistrationFeed</string>
     <string name="title_activity_registration_fail">RegistrationFail</string>
+    <string name="title_activity_admin_hub">AdminHub</string>
 
 </resources>

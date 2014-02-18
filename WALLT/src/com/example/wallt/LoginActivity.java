@@ -27,7 +27,11 @@ public class LoginActivity extends Activity {
  
             public void onClick(View v) {
             	//this needs to be replaced with a SQL query
-            	if (db.loginVerify(userName.getText().toString(), passWord.getText().toString())) {
+            	if (userName.getText().toString().equals("admin") && passWord.getText().toString().equals("pass123")) {
+            		Intent i = new Intent(getApplicationContext(), AdminHub.class);
+            		startActivity(i);
+            	}
+            	else if (db.loginVerify(userName.getText().toString(), passWord.getText().toString())) {
 	            	Intent i = new Intent(getApplicationContext(), MainHub.class);
 	          	  	startActivity(i);
             	} else {

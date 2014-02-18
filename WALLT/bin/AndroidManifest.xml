@@ -16,17 +16,50 @@
         <activity
             android:name="com.example.wallt.SplashActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.wallt.WelcomeActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name="com.example.wallt.LoginActivity"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.example.wallt.WelcomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.wallt.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:parentActivityName="com.example.wallt.WelcomeActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.wallt.WelcomeActivity" />
+        </activity>
+        <activity
+            android:name="com.example.wallt.RegisterActivity"
+            android:label="@string/title_activity_register"
+            android:parentActivityName="com.example.wallt.WelcomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.wallt.WelcomeActivity" />
+        </activity>
+        <activity
+            android:name="com.example.wallt.MainHub"
+            android:label="@string/title_activity_main_hub" >
+        </activity>
+        <activity
+            android:name="com.example.wallt.LoginFail"
+            android:label="@string/title_activity_login_fail" >
+        </activity>
+        <activity
+            android:name="com.example.wallt.RegistrationFeed"
+            android:label="@string/title_activity_registration_feed" >
+        </activity>
+        <activity
+            android:name="com.example.wallt.AdminHub"
+            android:label="@string/title_activity_admin_hub" >
+        </activity>
     </application>
 
 </manifest>
