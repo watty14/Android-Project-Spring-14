@@ -31,7 +31,7 @@ public class RegisterActivity extends Activity {
 		            Intent i = new Intent(getApplicationContext(), RegistrationFeed.class);
 		          	startActivity(i);
 	        	} else {
-	        		Intent i = new Intent(getApplicationContext(), LoginFail.class);
+	        		Intent i = new Intent(getApplicationContext(), RegistrationFail.class);
 	          	  	startActivity(i);
 	            }
 	        	finish();

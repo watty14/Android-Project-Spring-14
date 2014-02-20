@@ -18,7 +18,7 @@
     <string name="title_activity_login">Login</string>
     <string name="hello_world">Hello world!</string>
     <string name="successful_login">You have logged in successfully!</string>
-    <string name="login_fail">Incorrect input</string>
+    <string name="login_fail">Incorrect username/password</string>
     <string name="registration_failed">Unable to register</string>
     <string name="admin_hub_welcome">Successful admin login</string>
     <string name="title_activity_main_hub">MainHub</string>
