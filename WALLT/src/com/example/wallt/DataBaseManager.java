@@ -1,6 +1,7 @@
 package com.example.wallt;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,192 +11,181 @@ import android.util.Log;
 
 public class DataBaseManager {
 
-	Context context;
-    private SQLiteDatabase db;
-    private final String DB_NAME = "database_name";
-    private final int DB_VERSION = 1;
-    
-    private final String TABLE_NAME = "database_table";
-    private final String TABLE_COLUMN_ID = "id";
-    private final String TABLE_COLUMN_ONE = "user_name";
-    private final String TABLE_COLUMN_TWO = "pass_word";
-    
+    //Database version
+    private static final int DATABASE_VERSION = 1;
+
+    //Database Name
+    private static final String DATABASE_NAME = "walltDatabase";
+
+    //Table Names
+    private static final String TABLE_USERS = "users";
+    private static final String TABLE_BANKACCOUNTS = "bankAccounts";
+
+    //Common column names
+    private static final String KEY_ID = "id";
+    private static final String USERNAME = "username";
+
+    //USERS TABLE - column names
+    private static final String PASSWORD = "password";
+
+    //BANKACCOUNTS TABLE - column names
+    private static final String ACCOUNT_NUMBER = "accountNumber";
+    private static final String BANK_NAME = "bankName";
+    private static final String BALANCE = "balance";
+
+    //Create USERS Table
+    private static final String CREATE_TABLE_USERS = "create table "
+        + TABLE_USERS + "(" + KEY_ID + "integer primary key autoincrement,"
+        + USERNAME + "text not null unique,"
+        + PASSWORD + "text not null" + ")";
+
+    //Create BANKACCOUNTS Table
+    private static final String CREATE_TABLE_BANKACCOUNTS = "create table "
+        + TABLE_BANKACCOUNTS + "(" + KEY_ID
+        + "integer primary key autoincrement,"
+        + USERNAME + "text not null,"
+        + ACCOUNT_NUMBER + "integer not null,"
+        + BANK_NAME + "text not null,"
+        + BALANCE + "integer not null" + ")";
+
+    private SQLiteDatabase database;
+
     public DataBaseManager(Context context) {
-    	this.context = context;
     	CustomSQLiteOpenHelper helper = new CustomSQLiteOpenHelper(context);
-    	this.db = helper.getWritableDatabase();
+    	this.database = helper.getWritableDatabase();
+    }
+
+    public long addUser(String username, String password) {
+        ContentValues values = new ContentValues();
+        values.put(USERNAME, username);
+        values.put(PASSWORD, password);
+        long user_id = -1;
+        try {
+            database.insert(TABLE_USERS, null, values);
+        } catch (Exception e) {
+            Log.e("DB ERROR", e.toString());
+            e.printStackTrace();
+        }
+        return user_id;
+    }
+    
+    public LinkedList<BankAccount> getBankAccounts(String username) {
+    	LinkedList<BankAccount> list = new LinkedList<BankAccount>();
+        String selectQuery = "SELECT * FROM " + TABLE_BANKACCOUNTS + "WHERE "
+        		+ USERNAME + " = " + username;
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor != null) {
+        	cursor.moveToFirst();
+        	while (!cursor.isAfterLast()) {
+	    		int accountNumber = cursor.getInt(2);
+	    		String bankName = cursor.getString(3);
+	    		int balance = cursor.getInt(4);
+	    		BankAccount bankAccount = new BankAccount(accountNumber, balance, bankName);
+	    		list.add(bankAccount);
+	    		cursor.moveToNext();
+        	}
+        	cursor.close();
+        }
+        return list;
+    }
+
+    public long addBankAccount(String username, int accountNumber,
+            String bankName, int balance) {
+        ContentValues values = new ContentValues();
+        values.put(USERNAME, username);
+        values.put(ACCOUNT_NUMBER, accountNumber);
+        values.put(BANK_NAME, bankName);
+        values.put(BALANCE, balance);
+        long user_id = -1;
+        try {
+            database.insert(TABLE_BANKACCOUNTS, null, values);
+        } catch (Exception e) {
+            Log.e("DB ERROR", e.toString());
+            e.printStackTrace();
+        }
+        return user_id;
+    }
+
+    public void deleteUser(String userName) {
+        try {
+    		database.delete(TABLE_USERS, USERNAME + " = " + userName, null);
+    	} catch (Exception e) {
+    		Log.e("DB ERROR", e.toString());
+    		e.printStackTrace();
+    	}
+    }
+
+    public void deleteBankAccount(String userName, int accountNumber,
+            String bankName) {
+        try {
+    		database.delete(TABLE_USERS, USERNAME + " = " + userName + " AND "
+                    + ACCOUNT_NUMBER + " = " + accountNumber + " AND "
+                    + BANK_NAME + " = " + bankName, null);
+    	} catch (Exception e) {
+    		Log.e("DB ERROR", e.toString());
+    		e.printStackTrace();
+    	}
+    }
+
+    public void updateBalance(String userName, int accountNumber,
+            String bankName, int balance) {
+        ContentValues values = new ContentValues();
+        values.put(USERNAME, userName);
+        values.put(ACCOUNT_NUMBER, accountNumber);
+        values.put(BANK_NAME, bankName);
+        try {
+            database.update(TABLE_BANKACCOUNTS, values, BALANCE + " = " + balance,
+                    null);
+        } catch (Exception e) {
+            Log.e("DB Error", e.toString());
+            e.printStackTrace();
+        }
+    }
+
+    public void closeDataBase() {
+        if (database != null && database.isOpen())
+        database.close();
+    }
+
+    public boolean loginVerify(String username, String password) {
+        boolean found = false;
+        String selectQuery = "SELECT * FROM " + TABLE_USERS + "WHERE "
+            + USERNAME + " = " + username + " AND " + PASSWORD + " = "
+            + password;
+        Cursor c = database.rawQuery(selectQuery, null);
+        if (c != null) {
+           found = true;
+        }
+        return found;
+    }
+
+    public boolean registerVerify(String username, String password) {
+        Cursor c = null;
+        if (!username.equals("") && !password.equals("")) {
+	        String selectQuery = "SELECT * FROM " + TABLE_USERS + "WHERE "
+	            + USERNAME + " = " + username;
+	        c = database.rawQuery(selectQuery, null);
+	        if (c == null) {
+	            addUser(username, password);
+	        }
+        }
+        return c != null;
     }
 
     private class CustomSQLiteOpenHelper extends SQLiteOpenHelper {
 
         public CustomSQLiteOpenHelper(Context context) {
-            super(context, DB_NAME, null, DB_VERSION);
+            super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 
-        public void onCreate(SQLiteDatabase db) {
-            String newTableQueryString =
-                "create table " +
-                TABLE_NAME +
-                " (" +
-                TABLE_COLUMN_ID + " integer primary key autoincrement not null," +
-                TABLE_COLUMN_ONE + " text not null unique," +
-                TABLE_COLUMN_TWO + " text not null" +
-                ");";
-            db.execSQL(newTableQueryString);
+        public void onCreate(SQLiteDatabase database) {
+            database.execSQL(CREATE_TABLE_USERS);
+            database.execSQL(CREATE_TABLE_BANKACCOUNTS);
         }
 
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        public void onUpgrade(SQLiteDatabase db, int oldVersion,
+                int newVersion) {
         }
+    }
 
-    }
-    
-    public void addRow(String username, String password) {
-    	ContentValues values = new ContentValues();
-    	values.put(TABLE_COLUMN_ONE, username);
-    	values.put(TABLE_COLUMN_TWO, password);
-    	try {
-    		db.insert(TABLE_NAME, null, values);
-    	} catch (Exception e) {
-    		Log.e("DB ERROR", e.toString());
-    		e.printStackTrace();
-    	}
-    }
-    
-    public void deleteRow(long rowID) {
-    	try {
-    		db.delete(TABLE_NAME, TABLE_COLUMN_ID + "=" + rowID, null);
-    	} catch (Exception e) {
-    		Log.e("DB ERROR", e.toString());
-    		e.printStackTrace();
-    	}
-    }
-    
-    public void updateRow(long rowID, String username, String password) {
-    	ContentValues values = new ContentValues();
-    	values.put(TABLE_COLUMN_ONE, username);
-    	values.put(TABLE_COLUMN_TWO, password);
-    	try {
-    		db.update(TABLE_NAME, values, TABLE_COLUMN_ID + "=" + rowID, null);
-    	} catch (Exception e) {
-    		Log.e("DB Error", e.toString());
-    		e.printStackTrace();
-    	}
-    }
-    
-    public ArrayList<Object> getRowAsArray(long rowID) {
-    	ArrayList<Object> rowArray = new ArrayList<Object>();
-    	Cursor cursor = null;
-    	try {
-    		cursor = db.query(
-    				TABLE_NAME,
-    				new String[] { TABLE_COLUMN_ID, TABLE_COLUMN_ONE, TABLE_COLUMN_TWO },
-    				TABLE_COLUMN_ID + "=" + rowID,
-    				null, null, null, null, null
-    		);
-    		cursor.moveToFirst();
-    		if (!cursor.isAfterLast()) {
-	    		do {
-	    			ArrayList<Object> dataList = new ArrayList<Object>();
-	    			dataList.add(cursor.getLong(0));
-	    			dataList.add(cursor.getString(1));
-	    			dataList.add(cursor.getString(2));
-	    			rowArray.add(dataList);
-	    		} while(cursor.moveToNext());
-    		}
-    		cursor.close();
-    	} catch (Exception e) {
-    		Log.e("DB ERROR", e.toString());
-    		e.printStackTrace();
-   
-    	}
-    	return rowArray;
-    }
-    
-    public ArrayList<ArrayList<Object>> getAllRowsAsArrays() {
-        ArrayList<ArrayList<Object>> dataArrays = new ArrayList<ArrayList<Object>>();
-        Cursor cursor;
-
-        try {
-            cursor = db.query(
-                    TABLE_NAME,
-                    new String[]{TABLE_COLUMN_ID, TABLE_COLUMN_ONE, TABLE_COLUMN_TWO},
-                    null, null, null, null, null
-            );
-            cursor.moveToFirst();
-            if (!cursor.isAfterLast()) {
-                do {
-                    ArrayList<Object> dataList = new ArrayList<Object>();
-
-                    dataList.add(cursor.getLong(0));
-                    dataList.add(cursor.getString(1));
-                    dataList.add(cursor.getString(2));
-
-                    dataArrays.add(dataList);
-                } while (cursor.moveToNext());
-            }
-        }
-        catch (Exception e) {
-            Log.e("DB Error", e.toString());
-            e.printStackTrace();
-        }
-
-        // return the ArrayList that holds the data collected from
-        // the database.
-        return dataArrays;
-    }
-    
-    public boolean loginVerify(String username, String password) {
-    	Cursor cursor = null;
-    	boolean matches = false;
-    	try {
-    		cursor = db.query(
-    				TABLE_NAME,
-    				new String[] { TABLE_COLUMN_ID, TABLE_COLUMN_ONE, TABLE_COLUMN_TWO },
-    				TABLE_COLUMN_ONE + "= '" + username + "'", 
-    				null, null, null, null, null
-    		);
-    		cursor.moveToFirst();
-    		if (!cursor.isAfterLast()) {
-    			if (username.equals(cursor.getString(1).toString()) && 
-    					password.equals(cursor.getString(2).toString())) {
-    				matches = true;
-    			}
-    		}
-    		cursor.close();
-    	} catch (Exception e) {
-    		Log.e("DB ERROR", e.toString());
-    		e.printStackTrace();
-   
-    	}
-    	return matches;
-    }
-    
-    public boolean registerVerify(String username, String password) {
-    	Cursor cursor = null;
-    	boolean legal = true;
-    	if (username.equals("") || password.equals("")) {
-    		legal = false;
-    	}
-    	try {
-    		cursor = db.query(
-    				TABLE_NAME,
-    				new String[] { TABLE_COLUMN_ONE },
-    				TABLE_COLUMN_ONE + "= '" + username + "'", 
-    				null, null, null, null, null
-    		);
-    		cursor.moveToFirst();
-    		if (!cursor.isAfterLast()) {
-    			if (username.equals(cursor.getString(0).toString())) {
-    				legal = false;
-    			}
-    		}
-    		cursor.close();
-    	} catch (Exception e) {
-    		Log.e("DB ERROR", e.toString());
-    		e.printStackTrace();
-   
-    	}
-    	return legal;
-    }
-    
 }
