@@ -3,26 +3,29 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="255" key="DIALOG_WIDTH"/>
 		<item value="173" key="DIALOG_Y_ORIGIN"/>
-		<item value="593" key="DIALOG_X_ORIGIN"/>
 		<item value="399" key="DIALOG_HEIGHT"/>
+		<item value="593" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Nanum Gothic|11.0|0|COCOA|1|NanumGothic" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="wallt" key="selection"/>
+		<item value="USER_NAME" key="selection"/>
 		<list key="findhistory">
+			<item value="USERNAME"/>
+			<item value="autoincrement"/>
+			<item value="splash"/>
+			<item value="registerfeed"/>
+			<item value="register"/>
 			<item value="watty"/>
 			<item value="″"/>
 			<item value="”"/>
-			<item value="&lt;?xml version=”1.0″ encoding=”UTF-8″?&gt;&#x0A;&lt;shape xmlns:android=”http://schemas.android.com/apk/res/android”&gt;&#x0A;&lt;solid android:color=”#F000″/&gt;&#x0A;&lt;stroke android:width=”1px” android:color=”#BB000000″ /&gt;&#x0A;&lt;padding&#x0A;android:left=”10dp”&#x0A;android:top=”7dp”&#x0A;android:right=”10dp”&#x0A;android:bottom=”7dp”&#x0A;/&gt;&#x0A;&lt;corners&#x0A;android:bottomRightRadius=”5dp”&#x0A;android:bottomLeftRadius=”5dp”&#x0A;android:topLeftRadius=”5dp”&#x0A;android:topRightRadius=”5dp”&#x0A;/&gt;&#x0A;&lt;gradient&#x0A;android:angle=”90″&#x0A;android:startColor=”#739312″&#x0A;android:centerColor=”#86a621″&#x0A;android:endColor=”#9cc126″&#x0A;android:type=”linear”&#x0A;/&gt;&#x0A;&#x0A;&lt;/shape&gt;"/>
-			<item value="&quot;"/>
-			<item value="background"/>
 		</list>
 		<list key="replacehistory">
+			<item value="USER_NAME"/>
 			<item value="wallt"/>
 			<item value="&quot;"/>
 		</list>
