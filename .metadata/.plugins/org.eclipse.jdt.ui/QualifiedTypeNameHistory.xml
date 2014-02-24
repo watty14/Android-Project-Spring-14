@@ -4,4 +4,5 @@
 <fullyQualifiedTypeName name="android.view.View"/>
 <fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="com.example.wallt.R.id"/>
+<fullyQualifiedTypeName name="android.os.Bundle"/>
 </qualifiedTypeNameHistroy>
